@@ -1,0 +1,1231 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="utf-8">
+    <meta name="robots" content="noindex">
+
+    <title>Note au dossier</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<link
+		href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+		rel="stylesheet"
+		id="bootstrap-css"
+	  />
+	<!-- font awesome  -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style type="text/css">
+    .wizard {
+    margin: 20px auto;
+    background: #fff;
+}
+
+    .wizard .nav-tabs {
+        position: relative;
+        margin: 40px auto;
+        margin-bottom: 0;
+        border-bottom-color: #e0e0e0;
+    }
+
+    .wizard > div.wizard-inner {
+        position: relative;
+    }
+
+.connecting-line {
+    height: 2px;
+    background: #e0e0e0;
+    position: absolute;
+    width: 80%;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: 50%;
+    z-index: 1;
+}
+
+.wizard .nav-tabs > li.active > a, .wizard .nav-tabs > li.active > a:hover, .wizard .nav-tabs > li.active > a:focus {
+    color: #555555;
+    cursor: default;
+    border: 0;
+    border-bottom-color: transparent;
+}
+
+span.round-tab {
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+    display: inline-block;
+    border-radius: 100px;
+    background: #fff;
+    border: 2px solid #e0e0e0;
+    z-index: 2;
+    position: absolute;
+    left: 0;
+    text-align: center;
+    font-size: 25px;
+}
+span.round-tab i{
+    color:#555555;
+}
+.wizard li.active span.round-tab {
+    background: #fff;
+    border: 2px solid #5bc0de;
+    
+}
+.wizard li.active span.round-tab i{
+    color: #5bc0de;
+}
+
+span.round-tab:hover {
+    color: #333;
+    border: 2px solid #333;
+}
+
+.wizard .nav-tabs > li {
+    width: 20%;
+}
+
+.wizard li:after {
+    content: " ";
+    position: absolute;
+    left: 46%;
+    opacity: 0;
+    margin: 0 auto;
+    bottom: 0px;
+    border: 5px solid transparent;
+    border-bottom-color: #5bc0de;
+    transition: 0.1s ease-in-out;
+}
+
+.wizard li.active:after {
+    content: " ";
+    position: absolute;
+    left: 46%;
+    opacity: 1;
+    margin: 0 auto;
+    bottom: 0px;
+    border: 10px solid transparent;
+    border-bottom-color: #5bc0de;
+}
+
+.wizard .nav-tabs > li a {
+    width: 70px;
+    height: 70px;
+    margin: 20px auto;
+    border-radius: 100%;
+    padding: 0;
+}
+
+    .wizard .nav-tabs > li a:hover {
+        background: transparent;
+    }
+
+.wizard .tab-pane {
+    position: relative;
+    padding-top: 50px;
+}
+
+.wizard h3 {
+    margin-top: 0;
+}
+
+@media( max-width : 585px ) {
+
+    .wizard {
+        width: 90%;
+        height: auto !important;
+    }
+
+    span.round-tab {
+        font-size: 16px;
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+    }
+
+    .wizard .nav-tabs > li a {
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+    }
+
+    .wizard li.active:after {
+        content: " ";
+        position: absolute;
+        left: 35%;
+    }
+}
+</style> <style>
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 40%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+.element-top10{
+	margin-top:10px;
+}
+/* updates css  */
+div#step3 {
+    position: relative;
+}
+
+.settings {
+    position: absolute;
+    right: 27px;
+    top: 12px;
+    font-size: 24px;
+}
+.settings a {
+    color: #333232;
+}
+.form-group {
+    display: flex;
+    justify-content: flex-end;
+}
+.addbtn, .editSubmit {
+    margin: 10px 0px;
+}
+/* updates css  */
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 999999999; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+.editSubmit{
+	display:none;
+}
+div#step3 p {
+    max-width: 700px;
+    line-height: 44px;
+    text-transform: capitalize;
+	
+}
+.form-col {
+    max-width: 300px;
+}
+thead {
+    background: #f7eded;
+}
+</style>
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<center><img src="dpaassurance-logo.png" alt="Dpa Assurance" align="middle"></center>
+	<div class="container">
+	<div class="row">
+		<section>
+        <div class="wizard">
+            <div class="wizard-inner">
+                <div class="connecting-line"></div>
+                <ul class="nav nav-tabs" role="tablist">
+
+                    <li role="presentation" class="active">
+                        <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Étape 1">
+                            <span class="round-tab">
+                                <i class="glyphicon glyphicon-folder-open"></i>
+                            </span>
+                        </a>
+                    </li>
+
+                    <li role="presentation" class="disabled">
+                        <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Étape 2">
+                            <span class="round-tab">
+                                <i class="glyphicon glyphicon-pencil"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li role="presentation" class="disabled">
+                        <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Étape 3">
+                            <span class="round-tab">
+                                <i class="glyphicon glyphicon-picture"></i>
+                            </span>
+                        </a>
+                    </li>
+
+                    <li role="presentation" class="disabled">
+                        <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Étape 4">
+                            <span class="round-tab">
+                                <i class="glyphicon glyphicon-ok"></i>
+                            </span>
+                        </a>
+                    </li>
+					<li role="presentation" class="disabled">
+                        <a href="#result" data-toggle="tab" aria-controls="result" role="tab" title="Résultat">
+                            <span class="round-tab">
+                                <i class="glyphicon glyphicon-saved"></i>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+			
+			
+
+            <form role="form" name = "myForm" action = "" onSubmit = "return validateForm()" method = "post" > 
+			
+			<div class = "tab-content" > 
+				<div class = "tab-pane active" role = "tabpanel" id = "step1" >
+
+				<h3 > </h3>
+                        <div class="col-md-6">
+						<p><b>Que fais-tu? :</b > <select name = "choice" id = "choice" class = "form-control" required> 
+						<option value = "" > Select </option>
+							<option value="Ajouter">Ajout</option > <option value = "Substitution" > Substitution </option>
+							</select > </p>
+                        <p><b>Nom :</b > 
+						<input type = "text" name = "name" id = "name" class = "form-control" placeholder = "Entrer le nom du client" required > </p>
+						<p><b>Vous avez identifer le client en validant: </b > </p>
+						<input type="checkbox" name="valid" id="address" value="Address"> Adresse
+						<input type="checkbox" name="valid" id="phone" value="Phone No"> Téléphone
+						<input type="checkbox" name="valid" id="email" value="Email Id"> Courriel
+						<input type="checkbox" name="validall" id="ckall" value="Check All" onClick="check()"> Tout sélectionner</p> 
+							
+<script>
+function check() {
+    document.getElementById("address").checked = true;
+    document.getElementById("phone").checked = true;
+    document.getElementById("email").checked = true;
+} </script>
+                <ul class="list-inline pull-right">
+                <li><button type="button" class="btn btn-primary next-step">Étape suivante</button > </li>
+                </ul > 
+				</div>
+              </div > 
+			  
+			  <div class = "tab-pane" role = "tabpanel" id = "step2" > 
+				<h3 > Informations </h3>
+                    <div class="raw">
+						<div class="col-sm-12">
+						
+						<div class="col-lg-3">
+						<p>Véhicule:</p>
+
+				<select name = "car" id = "car" class = "form-control" > 
+					<option value = "car" > Auto </option>
+					<option value="boat">Bateau</option > 
+					<option value = "motorcycle" >Moto </option>
+					<option value="4wheels">VTT</option > 
+				</select>
+			  </div > 
+			  
+			<div class = "col-lg-3" > <p> Marque: <input type = "text" name = "brand" class = "form-control" id = "brand" > </p>  
+						 <p>Modèle: <input type="text" name="model" class="form-control" id="model"></p> 
+						 <p> Année: <input type = "text"name = "year" class = "form-control" id = "year" > </p>  
+						 <p>Prime: <input type="text" name="price" class="form-control" id="price"></p> 
+						 <p> KM: KM annuel | KM Travail | KM Affaire <input type = "text" name = "km" class = "form-control" id = "km" > </p>  
+			</div > 
+			<div class = "col-lg-3"> 
+				<p> <input type = "checkbox" name = "million" class = "million" id = "million1" value = "1 Million" > 1 Million <input type = "checkbox" name = "million" class = "million" id = "million2" value = "2 Millions" > 2 Millions </p>
+		
+  		
+  <script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+  crossorigin="anonymous"
+></script>		
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+$('.million').click(function() {
+$(this).siblings('input:checkbox').prop('checked', false);
+});
+
+</script > 
+				<p>B1: <input type = "text" name = "b1" class = "form-control" id = "b1"></p>  
+				<p>B2: <input type="text" name="b2" class="form-control" id="b2"></p> 
+				<p>B3: <input type = "text" name = "b3" class = "form-control" id = "b3" ></p>  
+				<p>B4: <input type="text" name="b4" class="form-control" id="b4"></p> 
+			</div>
+			
+			<div class="col-lg-3">
+				<p>
+					<div class="col-lg-2 element-top10">INOV</div > <div class = "col-lg-10 element-top10" > 
+						<select name = "INOV" id = "INOV" class = "" required> 
+							<option value = "" > Select </option>
+							<option value="Accepted">Accepter</option > 
+							<option value = "Refuse" > Refuser </option>
+							<option value="NotAsk">Pas offert</option > 
+							<option value = "NotElligible" > Nonéligible </option>
+						</select > 
+					</div>
+				</p> 
+				<p> 
+					<div class = "col-lg-2 element-top10" > VAN </div>
+						<div class="col-lg-10 element-top10">
+							<select name="VAN" id="VAN" class="" required>
+							<option value="">Select</option > 
+							<option value = "Accepted" > Accepter </option>
+							<option value="Refuse">Refuser</option > 
+							<option value = "NotAsk" > Pas offert </option>
+							<option value="NotElligible">Non éligible</option > </select>
+						</div > 
+				</p> 
+				<p>
+					<div class="col-lg-2 element-top10">C37</div > 
+						<div class = "col-lg-10 element-top10" > 
+							<select name = "C37" id = "C37" class = "" required > 
+								<option value = "" > Select </option>
+								<option value="Accepted">Accepter</option > 
+								<option value = "Refuse" > Refuser </option>
+								<option value="NotAsk">Pas offert</option > 
+								<option value = "NotElligible" > Non éligible </option>
+							</select > 
+						</div>
+				</p> 
+				<p> <div class = "col-lg-2 element-top10" > 33E </div>
+						<div class="col-lg-10 element-top10">
+							<select name="33E" id="33E" class="" required>
+								<option value="">Select</option > 
+									<option value = "Accepted" > Accepter </option>
+									<option value="Refuse">Refuser</option > 
+									<option value = "NotAsk" > Pas offert </option>
+									<option value="NotElligible">Non éligible</option > </select>
+						</div > 
+				</p>
+				<p>
+					<div class="col-lg-2 element-top10">NBD</div > 
+						<div class = "col-lg-10 element-top10" > 
+							<select name = "NBD" id = "NBD" class = "" required > 
+								<option value = "" > Select </option>
+								<option value="Accepted">Accepter</option > 
+								<option value = "Refuse" > Refuser </option>
+								<option value="NotAsk">Pas offert</option > 
+								<option value = "NotElligible" > Nonéligible </option>
+							</select > 
+						</div>
+				</p> 
+				<p> 
+					<div class = "col-lg-2 element-top10" > NV3 </div>
+						<div class="col-lg-10 element-top10">
+							<select name="NV3" id="NV3" class="" required>
+								<option value="">Select</option > 
+								<option value = "Accepted" > Accepter </option>
+								<option value="Refuse">Refuser</option > 
+								<option value = "NotAsk" > Pas offert </option>
+								<option value="NotElligible">Non éligible</option > 
+							</select>
+						</div > 
+				</p> 
+				<p>
+					<div class="col-lg-2 element-top10">CIME</div > 
+						<div class = "col-lg-10 element-top10" > 
+							<select name = "CIME" id = "CIME" class = "" required > 
+								<option value = "" > Select </option>
+								<option value="Accepted">Accepter</option > 
+								<option value = "Refuse" > Refuser </option>
+								<option value="NotAsk">Pas offert</option > 
+								<option value = "NotElligible" > Non éligible </option>
+							</select > 
+						</div>
+				</p> 
+				<p> 
+					<div class = "col-lg-12 element-top10" > CIME: Prix | Nombres d 'année(s)</div>
+						<div class="col-lg-12 element-top10">
+							<input type="text" name="CIME1" class="form-control" id="CIME1">
+						</div>
+				</p>
+					</div>
+				   </div>
+				 </div>
+						
+                        <ul class="list-inline pull-right">
+                            <li><button type="button" class="btn btn-default prev-step">Étape précédante</button></li>
+                            <li><button type="button" class="btn btn-primary next-step">Étape suivante</button></li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane " role="tabpanel" id="step3">
+                        <h3>VALIDATION:</h3>
+                        <p><input type="checkbox" name="PropImma" id="PropImma" value="Prop. Imma"> Prop. Imma
+						<input type="checkbox" name="profession" id="profession" value="Profession"> Profession
+						&nbsp;&nbsp;<input type="checkbox" name="autreconducteur" id="autreconducteur" value="Autre Conducteur"> Autre Conducteur | Assignation
+						&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="other3" id="other3" value="Synchro"> Synchro  
+						<input type="checkbox" name="transport" id="transport" value="Transport"> Transport
+						&nbsp;&nbsp;&nbsp;<input type="checkbox" name="FADOQ" id="FADOQ" value="FADOQ"> FADOQ
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="validerprotection" id="validerprotection" value="Valider Protection"> Valider Protection
+						<input type="checkbox" name="ExtQC" id="ExtQC" value="Ext. QC"> Ext. QC
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="maconduite" id="maconduite" value="Ma conduite"> Ma conduite
+						<input type="checkbox" name="FLEX" id="FLEX" value="Système alarme | TAG | Burinage"> Système alarme | TAG | Burinage
+					</p>
+						
+						
+							
+						
+						<button id="myBtn" class="settings " ><i class="fa-solid fa-gear"></i></button>
+
+						<!-- The Modal -->
+						<div id="myModal" class="modal">
+						
+						  <!-- Modal content -->
+						  <div class="modal-content">
+							<span class="close">&times;</span>
+							<form>
+								<div class="mb-3 form-col">
+									<label for="exampleFormControlInput1" class="form-label">Add Field</label>
+									<input type="text" class="form-control" id="addfield" placeholder="add field">
+								  </div>
+								  <div class="form-group form-col">
+									<input type="submit" value="create" class="form-control btn-primary addbtn"/>
+									<input type="submit" value="edit" class="form-control btn-primary editSubmit"/>
+								  </div>
+							</form>
+							 <table class="table table-bordered mt-4 field-table">
+								<thead>
+									<tr>
+										<th>
+											name
+										</th>
+										<th>
+											action
+										</th>
+									</tr>
+									
+								</thead>
+								<tbody>
+									<tr>
+										<td>
+											<input type="checkbox" />
+											<label class="fieldName">Prop. Imma</label>
+											
+
+										</td>
+										<td>
+											<button class=" btn btn-warning edit-btn ">edit</button>
+											<button class="btn btn-danger delete-btn">delete</button>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<input type="checkbox" />
+											<label class="fieldName">Profession   </label>
+											
+
+										</td>
+										<td>
+											<button class=" btn btn-warning edit-btn ">edit</button>
+											<button class="btn btn-danger delete-btn">delete</button>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<input type="checkbox" />
+											<label class="fieldName">Autre Conducteur | Assignation</label>
+											
+
+										</td>
+										<td>
+											<button class=" btn btn-warning edit-btn ">edit</button>
+											<button class="btn btn-danger delete-btn">delete</button>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<input type="checkbox" />
+											<label class="fieldName">Synchro</label>
+											
+
+										</td>
+										<td>
+											<button class=" btn btn-warning edit-btn ">edit</button>
+											<button class="btn btn-danger delete-btn">delete</button>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<input type="checkbox" />
+											<label class="fieldName">Transport    </label>
+											
+
+										</td>
+										<td>
+											<button class=" btn btn-warning edit-btn ">edit</button>
+											<button class="btn btn-danger delete-btn">delete</button>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<input type="checkbox" />
+											<label class="fieldName">FADOQ</label>
+											
+
+										</td>
+										<td>
+											<button class=" btn btn-warning edit-btn ">edit</button>
+											<button class="btn btn-danger delete-btn">delete</button>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<input type="checkbox" />
+											<label class="fieldName">Valider Protection</label>
+											
+
+										</td>
+										<td>
+											<button class=" btn btn-warning edit-btn ">edit</button>
+											<button class="btn btn-danger delete-btn">delete</button>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<input type="checkbox" />
+											<label class="fieldName">Ext. QC</label>
+											
+
+										</td>
+										<td>
+											<button class=" btn btn-warning edit-btn ">edit</button>
+											<button class="btn btn-danger delete-btn">delete</button>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<input type="checkbox" />
+											<label class="fieldName">Ma Conduite </label>
+											
+
+										</td>
+										<td>
+											<button class=" btn btn-warning edit-btn ">edit</button>
+											<button class="btn btn-danger delete-btn">delete</button>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<input type="checkbox" />
+											<label class="fieldName">Prop. Imma</label>
+											
+
+										</td>
+										<td>
+											<button class=" btn btn-warning edit-btn ">edit</button>
+											<button class="btn btn-danger delete-btn">delete</button>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<input type="checkbox" />
+											<label class="fieldName">Système Alarme | TAG | Burinage</label>
+											
+
+										</td>
+										<td>
+											<button class=" btn btn-warning edit-btn ">edit</button>
+											<button class="btn btn-danger delete-btn">delete</button>
+										</td>
+									</tr>
+					
+								</tbody>
+							 </table>
+							<div class="form-group">
+								<button class="btn-primary  btn float-right save-btn">save</button>
+							</div>
+						  </div>
+						
+						</div>	
+					
+						
+						
+                        <ul class="list-inline pull-right">
+							
+                            <li><button type="button" class="btn btn-default prev-step">Étape précédante</button></li>
+                           <!-- <li><button type="button" class="btn btn-default next-step">Skip</button></li>-->
+                            <li><button type="button" class="btn btn-primary btn-info-full next-step">Étape suivante</button></li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane" role="tabpanel" id="complete">
+                        <h3>NOTE :</h3>
+                        <p><textarea name="note" id="note"  class="form-control" placeholder="Extra note" rows="5" cols="70"></textarea></p>
+						<ul class="list-inline pull-right">
+                            <li><button type="button" class="btn btn-default prev-step">Étape précédante</button></li>
+                            <li><button type="button" class="btn btn-primary btn-info-full next-step" onClick="myFunction()">Générer note</button></li>
+                        </ul>
+			
+                    </div>
+					 <div class="tab-pane" role="tabpanel" id="result">
+                        <p id="finalresult"></p>
+						<button type="button" class="btn btn-primary btn-info-full next-step" onClick="finishFunction()">Générer</button>
+					</div>
+                    <div class="clearfix"></div>
+                </div>
+            </form>
+			Version 1.4.4
+            						<script>
+function myFunction() {
+ var choice = document.getElementById("choice").value; 
+ 
+ var name=document.getElementById("name").value;
+ //checkbox
+ var valid1;
+ if(document.getElementById("address").checked)
+ {
+	valid1=":Oui";
+ }
+ else{
+ 	valid1=":Non";
+ }
+ var valid2;
+ if(document.getElementById("phone").checked)
+ {
+ 	valid2=":Oui";
+ }
+  else{
+ 	valid2=":Non";
+ }
+ var valid3;
+ if(document.getElementById("email").checked)
+ {
+ 	valid3=":Oui";
+ }
+  else{
+ 	valid3=":Non";
+ }
+
+ //Step2
+
+ //dropdown
+ var e = document.getElementById("car");
+var type = e.options[e.selectedIndex].text;
+//textbox
+var ccom=document.getElementById("brand").value;
+var cname=document.getElementById("model").value;
+var cyr=document.getElementById("year").value;
+var cpr=document.getElementById("price").value;
+var ckm=document.getElementById("km").value;
+//checkbox
+var mil;
+if(document.getElementById("million1").checked){
+mil="1 Million";
+}
+else if(document.getElementById("million2").checked){
+mil="2 Millions";	
+}
+//textbox
+var b1=document.getElementById("b1").value;
+var b2=document.getElementById("b2").value;
+var b3=document.getElementById("b3").value;
+var b4=document.getElementById("b4").value;
+//selectbox
+var accepted= [];    
+var refuse= [];    
+var notAsk= [];    
+var notElligible= [];    
+
+	if((document.getElementById("INOV").value)=="Accepted"){
+		
+		accepted.push("INOV");
+		
+	} 
+	else if((document.getElementById("INOV").value)=="Refuse"){
+	
+		refuse.push("INOV");
+	}
+	else if((document.getElementById("INOV").value)=="NotAsk"){
+	
+		notAsk.push("INOV");
+	}
+	else if((document.getElementById("INOV").value)=="NotElligible"){
+	
+		notElligible.push("INOV");
+	}
+	/**/
+	if((document.getElementById("VAN").value)=="Accepted"){
+		
+		accepted.push("VAN");
+		
+	} 
+	else if((document.getElementById("VAN").value)=="Refuse"){
+	
+		refuse.push("VAN");
+	}
+	else if((document.getElementById("VAN").value)=="NotAsk"){
+	
+		notAsk.push("VAN");
+	}
+	else if((document.getElementById("VAN").value)=="NotElligible"){
+	
+		notElligible.push("VAN");
+	}
+	/*3*/
+	if((document.getElementById("C37").value)=="Accepted"){
+		
+		accepted.push("C37");
+		
+	} 
+	else if((document.getElementById("C37").value)=="Refuse"){
+	
+		refuse.push("C37");
+	}
+	else if((document.getElementById("C37").value)=="NotAsk"){
+	
+		notAsk.push("C37");
+	}
+	else if((document.getElementById("C37").value)=="NotElligible"){
+	
+		notElligible.push("C37");
+	}
+	/*4*/
+	if((document.getElementById("33E").value)=="Accepted"){
+		
+		accepted.push("33E");
+		
+	} 
+	else if((document.getElementById("33E").value)=="Refuse"){
+	
+		refuse.push("33E");
+	}
+	else if((document.getElementById("33E").value)=="NotAsk"){
+	
+		notAsk.push("33E");
+	}
+	else if((document.getElementById("33E").value)=="NotElligible"){
+	
+		notElligible.push("33E");
+	}
+	/*5*/
+	if((document.getElementById("NBD").value)=="Accepted"){
+		
+		accepted.push("NBD");
+		
+	} 
+	else if((document.getElementById("NBD").value)=="Refuse"){
+	
+		refuse.push("NBD");
+	}
+	else if((document.getElementById("NBD").value)=="NotAsk"){
+	
+		notAsk.push("NBD");
+	}
+	else if((document.getElementById("NBD").value)=="NotElligible"){
+	
+		notElligible.push("NBD");
+	}
+	/*6*/
+	if((document.getElementById("NV3").value)=="Accepted"){
+		
+		accepted.push("NV3");
+		
+	} 
+	else if((document.getElementById("NV3").value)=="Refuse"){
+	
+		refuse.push("NV3");
+	}
+	else if((document.getElementById("NV3").value)=="NotAsk"){
+	
+		notAsk.push("NV3");
+	}
+	else if((document.getElementById("NV3").value)=="NotElligible"){
+	
+		notElligible.push("NV3");
+	}
+	/*7*/
+	if((document.getElementById("CIME").value)=="Accepted"){
+		
+		accepted.push("CIME");
+		
+	} 
+	else if((document.getElementById("CIME").value)=="Refuse"){
+	
+		refuse.push("CIME");
+	}
+	else if((document.getElementById("CIME").value)=="NotAsk"){
+	
+		notAsk.push("CIME");
+	}
+	else if((document.getElementById("CIME").value)=="NotElligible"){
+	
+		notElligible.push("CIME");
+		
+	} 
+	var cime = document.getElementById("CIME").value;
+//checkbox
+
+var val7r;
+val7r=document.getElementById("CIME1").value;
+
+
+//Step3
+
+
+var vtn1,vtn2,vtn3,vtn4,vtn5,vtn6,vtn7,vtn8,vtn9,vtn10;
+if(document.getElementById("PropImma").checked)
+{
+	vtn1="Prop. Imma,";
+}
+else if(!document.getElementById("PropImma").checked)
+{
+	vtn1="";
+}
+if(document.getElementById("profession").checked)
+{
+	vtn2="Profession,";
+}
+else if(!document.getElementById("profession").checked)
+{
+	vtn2="";
+}
+if(document.getElementById("autreconducteur").checked)
+{
+	vtn3="Autre Conducteur, assignation,";
+}
+else if(!document.getElementById("autreconducteur").checked)
+{
+	vtn3="";
+}
+if(document.getElementById("other3").checked)
+{
+	vtn4="Syncro,";
+}
+else if(!document.getElementById("other3").checked)
+{
+	vtn4="";
+}
+			
+
+if(document.getElementById("transport").checked)
+{
+	vtn5="Transport,";
+}
+else if(!document.getElementById("transport").checked)
+{
+	vtn5="";
+}
+if(document.getElementById("FADOQ").checked)
+{
+	vtn6="FADOQ,";
+}
+else if(!document.getElementById("FADOQ").checked)
+{
+	vtn6="";
+}
+if(document.getElementById("validerprotection").checked)
+{
+	vtn7="Protection,";
+}
+else if(!document.getElementById("validerprotection").checked)
+{
+	vtn7="";
+}
+
+
+if(document.getElementById("ExtQC").checked)
+{
+	vtn8="Ext QC,";
+}
+else if(!document.getElementById("ExtQC").checked)
+{
+	vtn8="";
+}
+if(document.getElementById("maconduite").checked)
+{
+	vtn9="Ma conduite,";
+}
+else if(!document.getElementById("maconduite").checked)
+{
+	vtn9="";
+}
+if(document.getElementById("FLEX").checked)
+{
+	vtn10="Système alarme | TAG | Burinage";
+}
+else if(!document.getElementById("FLEX").checked)
+{
+	vtn10="";
+}
+
+
+
+//Step4
+var note=document.getElementById("note").value;
+
+
+document.getElementById("finalresult").innerHTML = choice+" : \n\n  J'ai parlé avec "+name+" | Identification: Adresse "+valid1+", Téléphone " +valid2+", courriel " +valid3+" | Véhicule: "+type+" | "+ccom+" "+cname+" "+cyr+" | Prime + tx: "+cpr+" | "+ckm +" KM: "+mil+" RC | B1: "+b1+", B2: "+b2+", B3: "+b3+", B4: "+b4+", Accepté: "+accepted+" | Resufé: "+refuse+" | Nonéligible: "+notElligible+" | Pas offert: "+notAsk+" | CIME est: "+cime+" "+val7r+" $ | Validation: "+vtn1+" "+vtn2+" "+vtn3+" "+vtn4+" "+vtn5+" "+vtn6+" "+vtn7+" "+vtn8+" "+vtn9+" "+vtn10+" | "+note; 
+}
+function finishFunction(){
+	window.location.reload(true);
+}
+</script>
+        </div>
+    </section>
+   </div>
+</div>
+	<script type=" text/javascript">
+	$(document).ready(function () {
+    //Initialize tooltips
+    $('.nav-tabs > li a[title]').tooltip();
+    
+    //Wizard
+    $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+
+        var $target = $(e.target);
+    
+        if ($target.parent().hasClass('disabled')) {
+            return false;
+        }
+    });
+
+    $(".next-step").click(function (e) {
+		
+        var $active = $('.wizard .nav-tabs li.active');
+        $active.next().removeClass('disabled');
+        nextTab($active);
+
+    });
+    $(".prev-step ").click(function (e) {
+
+        var $active = $('.wizard .nav-tabs li.active');
+        prevTab($active);
+
+    });
+});
+
+function nextTab(elem) {
+    $(elem).next().find('a[data-toggle="tab"]').click();
+}
+function prevTab(elem) {
+    $(elem).prev().find('a[data-toggle="tab "]').click();
+}
+	</script>
+
+<script>
+	// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+	//  add field in the popup 
+	const addbtn = document.querySelector(".addbtn");
+	let addInput = document.querySelector("#addfield");
+	let table = document.querySelector(".table");
+	let editedId = "";
+	var id = "";
+	
+		addbtn.addEventListener("click",()=>{
+		let addField = addInput.value;
+		id = "id" + Math.random().toString(16).slice(2);
+		if(addField !== ""){
+			let template = `<tr>
+										<td>
+											<input type="checkbox" class="fieldInput ${id}" value=${addField} />
+											<label class="fieldName ${id}">${addField}</label>
+											
+
+										</td>
+										<td>
+											<button class=" btn btn-warning edit-btn">edit</button>
+											<button class="btn btn-danger delete-btn">delete</button>
+										</td>
+									</tr>`;
+								
+	table.innerHTML += template;
+	addInput.value = "";
+	let template1 = `&nbsp; <input type="checkbox"  name="profession" id="profession" value="Profession"> <span class=${id}>${addField}<span/>
+						&nbsp;&nbsp;`;
+	table1 = document.querySelector("#step3 p");
+
+	// table1.innerHTML += template1;
+		}
+
+	});
+
+	
+//  delete row 
+	const deleteBtn = document.querySelector(".table");
+
+	deleteBtn.addEventListener("click",(e)=>{
+		if(!e.target.classList.contains("delete-btn")){
+			return;
+		}
+		 const btn = e.target;
+		  btn.closest("tr").remove();
+		  const checkbox = btn.parent.child("td");
+		  
+		  return;
+		
+	})
+
+	// edit field 
+	const editbtn = document.querySelector(".table");
+
+	editbtn.addEventListener("click",(e)=>{
+		if(!e.target.classList.contains("edit-btn")){
+			return;
+		}
+	 editedId = e.target.closest("tr").children[0].children[1].classList[1];
+	
+document.querySelector(".fieldName").classList.remove("editedLabel");
+	 let addbtn = document.querySelector(".addbtn");
+	 var addinput = document.querySelector("#addfield");
+	 const editsubmit = document.querySelector(".editSubmit");
+		addbtn.style.display = "none";
+		editsubmit.style.display = "block";
+
+	
+	document.querySelector(".fieldName").classList.remove("editedLabel");
+	 var editinput = e.target.closest("tr").children[0].children[1].innerHTML;
+		
+	 var editingClass = e.target.closest("tr").children[0].children[1].classList.add("editedLabel");
+
+	 addinput.value = editinput;
+	 
+	 
+		
+	})
+	
+
+	document.querySelector(".editSubmit").addEventListener("click",()=>{
+		let editedInput = document.querySelector("#addfield").value;
+		let editedLabel = document.querySelector(".editedLabel");
+		let addbtn = document.querySelector(".addbtn");
+		const editsubmit = document.querySelector(".editSubmit");
+		
+		
+		addbtn.style.display = "block";
+		editsubmit.style.display = "none";
+		document.querySelector(".editedLabel").innerHTML = editedInput;
+		document.querySelector("#addfield").value = "";
+		editedLabel.classList.remove("editedLabel");
+		// document.querySelector(`.${editedId}`).innerHTML = editedInput;
+
+	
+		
+		
+
+	})
+
+	document.querySelector(".save-btn").addEventListener("click",()=>{
+		let tabledata = document.querySelectorAll(".fieldName");
+		document.querySelector("#step3 p").innerHTML = "";
+		tabledata.forEach(data => {
+
+			let template1 = `&nbsp; <input type="checkbox"  name="profession" id="profession" value="Profession"> <span class=${id}>${data.innerHTML}<span/>
+						&nbsp;&nbsp;`;
+	table1 = document.querySelector("#step3 p");
+
+	table1.innerHTML += template1;
+			
+			});
+			modal.style.display = "none";
+	})
+ 
+</script>
+	
